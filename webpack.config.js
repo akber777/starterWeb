@@ -7,43 +7,21 @@ const fileLoader = require('file-loader');
 const CopyPlugin = require('copy-webpack-plugin');
 const htmlLoader = require('html-loader');
 const ConcatPlugin = require('webpack-concat-plugin');
-
-
-
-//bu hissədə yeni yaradılan html fayllarını qeyd edirik
-
-// const htmlFile = {
-//     index: "index.html",
-
-// };
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        app: './src/js/app.js'
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'build')
+        main: './src/js/main.js',
+        css: './src/css/main.scss'
     },
     output: {
 
         path: path.resolve(__dirname, 'build'),
-        filename: './js/[name].js'
+        filename: './js/[name].js',
     },
-    plugins: [
-        new CopyPlugin({
-            patterns: [
-                { from: 'src/', to: path.join(__dirname, 'build') }
-            ],
-        }),
-        new ConcatPlugin({
-            uglify: false,
-            useHash: false,
-            sourceMap: false,
-            name: 'all',
-            fileName: 'js/all.js',
-            filesToConcat: ['./src/js/**', './src/js/**'],
-        })
-    ],
+    devServer: {
+        contentBase: path.join(__dirname, 'build')
+    },
     module: {
         rules: [
             {
@@ -58,9 +36,54 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: ['html-loader']
-            },
+            }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'main/main.css'
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/',
+                    to: path.join(__dirname, 'build')
+                },
+            ],
+        }),
+        new ConcatPlugin({
+            uglify: false,
+            useHash: false,
+            sourceMap: false,
+            name: 'all',
+            fileName: 'js/all.js',
+            filesToConcat: ['./src/js/**', './src/js/**'],
+        })
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: { sourceMap: true }
+                    }, {
+                        loader: 'sass-loader',
+                        options: { sourceMap: true }
+                    }
+                ],
+            },
+        ],
+    },
+
+
 }
 
 
