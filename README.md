@@ -4,7 +4,6 @@
 ---------------------------------------
 ## Starteri clone etdikdən sonra Terminal vəya Gith Bash vasitəsiylə birinci npm install --save-dev webpack sonra ise  npm install commandını daxil etmək lazımdır bu 
 ## npm install --save-dev webpack bu Starterde istifadə olunan webpack modullarını fayla daxil edəcəy 
-## npm install bu Starterde istifadə olunan npm modullarını fayla daxil edəcəy
 -------------------------------------------- 
 Sonra isə Terminal vəya Gith Bash vasitəsiyl npm run start commandını daxil etmək lazımdır bu src faylında olan js html və css ve diger butun  faylları build papkasına köçürəcəy.
 ## Backend developerə isə build fayllarını gondərməy kifayət edir 
