@@ -19,7 +19,7 @@ Sonra isə Terminal vəya Gith Bash vasitəsiyl npm run start commandını daxil
 
 _---------------------------------------------------------------------_
 
-## @babel - babel vasitesiyle yaazdiqimiz Es6 -Es7 kimi update olunmus javascript funksiyalari browserin anladiqi dilde yeni Es5 versiyasina cevrilecey
+## @babel - babel vasitesiyle yaazdiqimiz Es6 -Es7 sintaksisinde  olunan javascript kodlarini browserin anladiqi dile yeni Es5 versiyasina cevirecey
 
 ## webpack-concat-plugin paketi ise srcde yerlesen componente ayrilmis Javascript faylarini hem ayri ayri olaraq hemde bir Javascript fayli kimi build klasorune kocurur all.js faylini saxlayib diger javascript fayllarini sile bilersiniz bu developerin oz secimidir her hansi bir deyisiklik etmey istediyde ise src de yerlesen js fayllarinda deyisiklik etmeniz kifayetdir 
 
