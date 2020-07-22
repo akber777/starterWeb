@@ -8,17 +8,18 @@ const CopyPlugin = require('copy-webpack-plugin');
 const htmlLoader = require('html-loader');
 const ConcatPlugin = require('webpack-concat-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const RemovePlugin = require('remove-files-webpack-plugin');
 
 module.exports = {
     entry: {
-        main: './src/js/main.js',
-        css: './src/css/main.scss'
+        main: ['./src/js/main.js'],
+        css: ['./src/css/main.scss']
 
     },
     output: {
 
         path: path.resolve(__dirname, 'build'),
-        filename: './js/main.js',
+        filename: '[name].js',
     },
     devServer: {
         contentBase: path.join(__dirname, 'build')
@@ -26,9 +27,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js)$/,
                 exclude: /node_modules/,
-                loader: "babel-loader"
+                use: ['babel-loader']
             }
         ]
     },
@@ -63,17 +64,38 @@ module.exports = {
         ],
     },
     plugins: [
+
+        new RemovePlugin({
+            after: {
+                root: './build',
+                include: [
+                    'css.js',
+                    'main.js',
+                ],
+
+
+                test: [
+                    {
+                        folder: 'js/',
+                        method: () => true,
+                        recursive: true
+                    }
+                ],
+
+
+                exclude: [
+                    'js/result.js'
+                ],
+
+                
+                trash: false
+            }
+        }),
+
         new MiniCssExtractPlugin({
             filename: 'css/main.css'
         }),
-        // new ConcatPlugin({
-        //     uglify: false,
-        //     useHash: false,
-        //     sourceMap: false,
-        //     name: 'all',
-        //     fileName: 'js/all.js',
-        //     filesToConcat: ['./src/js/**', './src/js/**'],
-        // }),
+
         new ConcatPlugin({
             uglify: false,
             sourceMap: false,
@@ -94,7 +116,7 @@ module.exports = {
                         ignore: [
                             '**/css/main.scss',
                             '**/css/pages/**',
-                            '**/js/main.js'
+
                         ]
                     }
                 },
@@ -104,16 +126,4 @@ module.exports = {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
