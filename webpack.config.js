@@ -13,11 +13,12 @@ module.exports = {
     entry: {
         main: './src/js/main.js',
         css: './src/css/main.scss'
+
     },
     output: {
 
         path: path.resolve(__dirname, 'build'),
-        filename: './js/[name].js',
+        filename: './js/main.js',
     },
     devServer: {
         contentBase: path.join(__dirname, 'build')
@@ -39,27 +40,6 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: 'main/main.css'
-        }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: 'src/',
-                    to: path.join(__dirname, 'build')
-                },
-            ],
-        }),
-        new ConcatPlugin({
-            uglify: false,
-            useHash: false,
-            sourceMap: false,
-            name: 'all',
-            fileName: 'js/all.js',
-            filesToConcat: ['./src/js/**', './src/js/**'],
-        })
-    ],
     module: {
         rules: [
             {
@@ -82,6 +62,45 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'css/main.css'
+        }),
+        // new ConcatPlugin({
+        //     uglify: false,
+        //     useHash: false,
+        //     sourceMap: false,
+        //     name: 'all',
+        //     fileName: 'js/all.js',
+        //     filesToConcat: ['./src/js/**', './src/js/**'],
+        // }),
+        new ConcatPlugin({
+            uglify: false,
+            sourceMap: false,
+            name: 'result',
+            outputPath: 'js/',
+            fileName: 'result.js',
+            filesToConcat: ['./src/js/**', ['./src/css/**', '!./src/css/**']],
+            attributes: {
+                async: true
+            }
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/',
+                    to: path.join(__dirname, 'build'),
+                    globOptions: {
+                        ignore: [
+                            '**/css/main.scss',
+                            '**/css/pages/**',
+                            '**/js/main.js'
+                        ]
+                    }
+                },
+            ],
+        }),
+    ],
 
 
 }
