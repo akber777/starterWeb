@@ -21,7 +21,7 @@ _---------------------------------------------------------------------_
 
 ## @babel - babel vasitesiyle yaazdiqimiz Es6 -Es7 sintaksisinde  olunan javascript kodlarini browserin anladiqi dile yeni Es5 versiyasina cevirecey
 
-## webpack-concat-plugin paketi ise srcde yerlesen componente ayrilmis Javascript faylarini hem ayri ayri olaraq hemde bir Javascript fayli kimi build klasorune kocurur all.js faylini saxlayib diger javascript fayllarini sile bilersiniz bu developerin oz secimidir her hansi bir deyisiklik etmey istediyde ise src de yerlesen js fayllarinda deyisiklik etmeniz kifayetdir 
+## webpack-concat-plugin paketi ise srcde yerlesen componente ayrilmis bir Javascript fayli kimi compile ederek build klasorune result.js adi ile kocurur   her hansi bir deyisiklik etmey istediyde ise src de yerlesen js fayllarinda deyisiklik etmeniz kifayetdir 
 
 ## @copy-webpack-plugin vasitesiyle src de olan butun fayllar build faylina kocurulecey
 
